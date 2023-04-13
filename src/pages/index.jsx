@@ -100,7 +100,7 @@ export default function Home() {
       <form className={styles.form}>
         <input
           type="text"
-          placeholder="Filtre os pokemons por nome ou tipo..."
+          placeholder="Filtre por nome"
           className={styles.input}
           value={filter}
           onChange={(event) => {
@@ -124,6 +124,7 @@ export default function Home() {
           <button
             disabled={paginationData.currentPage === 1}
             onClick={() => setCurrentPage("back")}
+            className={styles.paginationButton}
           >
             &lt; Anterior
           </button>
@@ -146,6 +147,7 @@ export default function Home() {
               paginationData.currentPage === paginationData.numberOfPages
             }
             onClick={() => setCurrentPage("advance")}
+            className={styles.paginationButton}
           >
             Próximo &gt;
           </button>

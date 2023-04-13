@@ -25,7 +25,6 @@
 }
 
 .button {
-    width: 20%;
     max-width: 80px;
     padding: 9.8px;
     border: none;
@@ -99,5 +98,13 @@
 
     .cardContainer {
         grid-template-columns: 1fr;
+    }
+
+    .paginationPanel {
+        font-size: 13px;
+    }
+
+    .paginationButton {
+        font-size: 13px;
     }
 }

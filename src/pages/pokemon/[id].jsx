@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "../../styles/PokemonById.module.css";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 export default function PokemonDetails() {
   const { query } = useRouter();
@@ -48,6 +49,13 @@ export default function PokemonDetails() {
     <>
       {pokemon?.species && !errorMessage ? (
         <div className={styles.container}>
+          {pokemons.length !== 0 && (
+            <Link href="/">
+              <span className={styles.link}>
+                Ver outros {pokemons.length - 1} pokemons
+              </span>
+            </Link>
+          )}
           {urlImage && (
             <Image
               src={urlImage}

@@ -6,6 +6,12 @@
     margin-block: 40px;
 }
 
+.link {
+    color: #1e1e1e;
+    text-decoration: underline;
+    padding-bottom: 40px;
+}
+
 .title {
     margin-bottom: 15px;
 }

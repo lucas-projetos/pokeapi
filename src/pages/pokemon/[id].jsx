@@ -34,32 +34,36 @@ export default function PokemonDetails() {
         <h2>Habilidade(s):</h2>
         <ul>
           {pokemon.abilities?.map((ability, index) => (
-            <li key={index}>{ability["ability"].name}</li>
+            <li key={index} className={styles.dataItem}>
+              {ability["ability"].name}
+            </li>
           ))}
         </ul>
         <h2>Tipo(s):</h2>
         <ul>
           {pokemon.types?.map((type, index) => (
-            <li key={index}>{type["type"].name}</li>
+            <li key={index} className={styles.dataItem}>
+              {type["type"].name}
+            </li>
           ))}
         </ul>
         <h2>Estatística(s):</h2>
-        <ul>
+        <ul className={styles.statisticsContainer}>
           {pokemon.stats?.map((stat, index) => (
             <li key={index}>
-              <div>
-                <h3>{stat["stat"].name}</h3>
-                <ul className={styles.statisticData}>
-                  <li>
-                    <span>Estatística básica:</span>
-                    {stat.base_stat}
-                  </li>
-                  <li>
-                    <span>Esforço:</span>
-                    {stat.effort}
-                  </li>
-                </ul>
-              </div>
+              <h3>
+                {++index}-&nbsp; {stat["stat"].name}
+              </h3>
+              <ul className={styles.statisticData}>
+                <li>
+                  <span>Estatística básica:</span>
+                  {stat.base_stat}
+                </li>
+                <li>
+                  <span>Esforço:</span>
+                  {stat.effort}
+                </li>
+              </ul>
             </li>
           ))}
         </ul>

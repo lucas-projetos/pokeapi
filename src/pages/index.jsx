@@ -35,7 +35,6 @@ export default function Home() {
       `https://pokeapi.co/api/v2/pokemon/?limit=${numberOfPokemons}
       `
     ).then((res) => res.json().then((json) => json));
-
     const pokemons = response.results;
     await pokemons.forEach((pokemon, index) => {
       pokemon.id = index + 1;
@@ -46,7 +45,7 @@ export default function Home() {
   }
 
   function setCurrentPage(action) {
-    const chooseAction = {
+    const chosenAction = {
       back: () => {
         const initialItem = (paginationData.currentPage - 2) * 20;
         const finalItem = initialItem + 20;
@@ -87,7 +86,7 @@ export default function Home() {
         );
       },
     };
-    chooseAction[action]();
+    chosenAction[action]();
   }
 
   useEffect(() => {
@@ -138,6 +137,7 @@ export default function Home() {
                 paginationData.currentPage === paginationData.numberOfPages
               }
               onClick={() => setCurrentPage("goToLastPage")}
+              className={styles.paginationButton}
             >
               {paginationData.numberOfPages}
             </button>

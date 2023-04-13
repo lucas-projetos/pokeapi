@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "../../styles/PokemonById.module.css";
+import { useSelector } from "react-redux";
 
 export default function PokemonDetails() {
   const { query } = useRouter();
@@ -9,6 +10,7 @@ export default function PokemonDetails() {
   const [pokemon, setPokemon] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const urlImage = pokemon?.sprites?.front_default;
+  const pokemons = useSelector((state) => state.pokemons);
 
   async function getPokemon() {
     const apiAddress = "https://pokeapi.co/api/v2/pokemon";
@@ -21,6 +23,19 @@ export default function PokemonDetails() {
             "Não foi possível encontrar informações específicas sobre esse pokemon em nossa base de dados..."
           )
         );
+      if (pokemons && pokemonData) {
+        pokemons.forEach((currentPokemon) => {
+          if (
+            currentPokemon.id === Number(pokemonId) &&
+            currentPokemon.name !== pokemonData.name
+          ) {
+            setErrorMessage(
+              "Esse pokemon possui informações incorretas em nossa base de dados. Ao recarregar a página você verá as informações erradas."
+            );
+          }
+        });
+      }
+
       setPokemon(pokemonData);
     }
   }
@@ -31,7 +46,7 @@ export default function PokemonDetails() {
 
   return (
     <>
-      {pokemon?.species ? (
+      {pokemon?.species && !errorMessage ? (
         <div className={styles.container}>
           {urlImage && (
             <Image

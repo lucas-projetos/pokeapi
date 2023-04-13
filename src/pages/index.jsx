@@ -1,6 +1,8 @@
 import Card from "@/components/Card";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setPokemons } from "@/store/actions/pokemons";
 
 export default function Home() {
   const numberOfPokemons = 1008;
@@ -9,6 +11,7 @@ export default function Home() {
   const [pokemonsByPage, setPokemonsByPage] = useState([]);
   const [paginationData, setPaginationData] = useState({});
   const [filter, setFilter] = useState("");
+  const dispatch = useDispatch();
 
   async function getFilteredList() {
     if (!filter) {
@@ -40,6 +43,7 @@ export default function Home() {
       pokemon.id = index + 1;
     });
     setPokemonsList(pokemons);
+    dispatch(setPokemons(pokemons));
     setPaginationData({ numberOfPages: numberOfPages, currentPage: 1 });
     setPokemonsByPage(pokemons.slice(0, 20));
   }

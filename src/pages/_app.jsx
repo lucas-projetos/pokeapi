@@ -1,10 +1,13 @@
 import "@/styles/globals.css";
 import Layout from "@/components/Layout";
+import { storeWrapper } from "../store";
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <Layout>
       <Component {...pageProps} />
     </Layout>
   );
 }
+
+export default storeWrapper.withRedux(App);

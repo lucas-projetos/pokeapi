@@ -27,7 +27,13 @@ export default function PokemonDetails() {
   return (
     <div className={styles.container}>
       {urlImage && (
-        <Image src={urlImage} width="200" height="200" alt="pokemon`s brand" />
+        <Image
+          src={urlImage}
+          width="200"
+          height="200"
+          alt="pokemon`s brand"
+          priority
+        />
       )}
       <h1 className={styles.title}>{pokemon.species?.name}</h1>
       <section className={styles.details}>

@@ -1,8 +1,8 @@
-import Card from "@/components/Card";
+import Card from "../components/Card";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setPokemons } from "@/store/actions/pokemons";
+import { setPokemons } from "../store/actions/pokemons";
 
 export default function Home() {
   const numberOfPokemons = 1008;
@@ -39,7 +39,7 @@ export default function Home() {
       `
     ).then((res) => res.json().then((json) => json));
     const pokemons = response.results;
-    await pokemons.forEach((pokemon, index) => {
+    pokemons?.forEach((pokemon, index) => {
       pokemon.id = index + 1;
     });
     setPokemonsList(pokemons);

@@ -34,11 +34,9 @@ export default function Home() {
 
   async function getPokemonsList() {
     const numberOfPages = Math.ceil(numberOfPokemons / 20);
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/?limit=${numberOfPokemons}
-      `
-    ).then((res) => res.json().then((json) => json));
-    const pokemons = response.results;
+
+    const pokemons = await getPokemonsFromApi();
+
     pokemons?.forEach((pokemon, index) => {
       pokemon.id = index + 1;
     });
@@ -46,6 +44,15 @@ export default function Home() {
     dispatch(setPokemons(pokemons));
     setPaginationData({ numberOfPages: numberOfPages, currentPage: 1 });
     setPokemonsByPage(pokemons.slice(0, 20));
+  }
+
+  async function getPokemonsFromApi() {
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/?limit=${numberOfPokemons}
+      `
+    ).then((res) => res.json().then((json) => json));
+    console.log(response);
+    return response.results;
   }
 
   function setCurrentPage(action) {

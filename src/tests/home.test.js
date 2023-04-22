@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import Home from "../pages/index";
 import { makeStore } from "../store";
 import { Provider } from "react-redux";
-import { act } from "react-dom/test-utils";
 
 const response = {
   results: [
@@ -19,12 +18,10 @@ const response = {
 
 describe("App Component", function () {
   it("should render the home component", async function () {
-    await act(async () =>
-      render(
-        <Provider store={makeStore()}>
-          <Home />
-        </Provider>
-      )
+    render(
+      <Provider store={makeStore()}>
+        <Home />
+      </Provider>
     );
 
     expect(screen.getByText("Consultar Pokemons")).toBeInTheDocument;

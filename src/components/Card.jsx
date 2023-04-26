@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Card({ pokemon }) {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} data-testid="card">
       <Image
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
         width="130"

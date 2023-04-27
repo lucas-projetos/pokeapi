@@ -14,7 +14,7 @@ describe("App Component", function () {
     useDispatch.mockReturnValue(jest.fn());
   });
 
-  const pokemons = [
+  const results = [
     { name: "bulbasaur", url: "https://pokeapi.co/api/v2/pokemon/1/", id: 1 },
     { name: "ivysaur", url: "https://pokeapi.co/api/v2/pokemon/2/", id: 2 },
     { name: "venusaur", url: "https://pokeapi.co/api/v2/pokemon/3/", id: 3 },
@@ -35,20 +35,22 @@ describe("App Component", function () {
   it("renders the home page with a list of pokemons", async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
-        json: () => Promise.resolve({ results: pokemons }),
+        json: () => Promise.resolve({ results }),
       })
     );
 
     render(<Home />);
 
-    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
-
-    expect(screen.getByText("Consultar Pokemons")).toBeInTheDocument;
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalled();
+      console.log(screen);
+      expect(screen.getByText("charmeleon")).toBeInTheDocument;
+    });
   });
   it("displays the list of pokemons correctly", async () => {
     global.fetch = jest.fn().mockImplementation(() =>
       Promise.resolve({
-        json: () => Promise.resolve({ results: pokemons }),
+        json: () => Promise.resolve({ results }),
       })
     );
     render(<Home />);
@@ -59,12 +61,12 @@ describe("App Component", function () {
   it("sets the pokemons list in the Redux store correctly", async () => {
     global.fetch = jest.fn().mockImplementation(() =>
       Promise.resolve({
-        json: () => Promise.resolve({ results: pokemons }),
+        json: () => Promise.resolve({ results }),
       })
     );
     render(<Home />);
     await waitFor(() => {
-      expect(setPokemons).toHaveBeenCalledWith(pokemons);
+      expect(setPokemons).toHaveBeenCalledWith(results);
     });
   });
 });
